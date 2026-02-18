@@ -6,13 +6,14 @@ import com.space.starwalkerplatform.dtos.SatellitePosition;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class SatelliteService {
 
-    private final RestTemplateConfig restTemplate;
+    private final RestTemplate restTemplate;
     private final N2YOConfig n2yoConfig;
 
     public SatellitePosition getSatellitePosition(Integer satelliteId, Integer seconds) {
