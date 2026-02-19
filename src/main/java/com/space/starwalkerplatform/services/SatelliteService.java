@@ -1,8 +1,8 @@
 package com.space.starwalkerplatform.services;
 
 import com.space.starwalkerplatform.configuration.N2YOConfig;
-import com.space.starwalkerplatform.configuration.RestTemplateConfig;
 import com.space.starwalkerplatform.dtos.SatellitePosition;
+import org.springframework.web.util.UriComponentsBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,7 @@ public class SatelliteService {
     private final RestTemplate restTemplate;
     private final N2YOConfig n2yoConfig;
 
-    public SatellitePosition getSatellitePosition(Integer satelliteId, Integer seconds) {
-        if (seconds == null || seconds < 1) {
-            seconds = 1;
-        }
-
-        String url = buildUrl(satelliteId, seconds);
+    public SatellitePosition getSatellitePosition(Integer satelliteId) {
 
         log.info("Fetching satellite position for ID: {} from N2YO API", satelliteId);
         log.debug("Request URL: {}", url);
@@ -37,18 +32,7 @@ public class SatelliteService {
         }
     }
 
-    public SatellitePosition getISSPosition() {
-        return getSatellitePosition(25544, 1);
-    }
-
     private String buildUrl(Integer satelliteId, Integer seconds) {
-        return String.format("%s/positions/%d/%f/%f/%f/%d/&apiKey=%s",
-                n2yoConfig.getApi().getBaseUrl(),
-                satelliteId,
-                n2yoConfig.getEarthObserver().getLatitude(),
-                n2yoConfig.getEarthObserver().getLongitude(),
-                n2yoConfig.getEarthObserver().getAltitude(),
-                seconds,
-                n2yoConfig.getApi().getKey());
+        return UriComponentsBuilder.fromUriString(n2yoConfig.getApi().getBaseUrl()).path("/positions/{satId}/{lat}/{lng}/{alt}/{seconds}/").queryParam("apiKey")
     }
 }
