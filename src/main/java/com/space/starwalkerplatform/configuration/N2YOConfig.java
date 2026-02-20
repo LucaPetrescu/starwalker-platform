@@ -1,14 +1,19 @@
 package com.space.starwalkerplatform.configuration;
 
-import com.space.starwalkerplatform.dtos.Api;
-import com.space.starwalkerplatform.dtos.EarthObserver;
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-
-@Configuration
+@ConfigurationProperties(prefix = "n2yo")
+@Component
 @Data
 public class N2YOConfig {
-    private Api api = new Api();
-    private EarthObserver earthObserver = new EarthObserver();
+    private ApiConfig api = new ApiConfig();
+
+    @Data
+    public static class ApiConfig {            // ← static is correct & recommended
+        private String baseUrl;
+        private String key;
+    }
 }

@@ -1,4 +1,4 @@
-package com.space.starwalkerplatform.dtos;
+package com.space.starwalkerplatform.dtos.singlesatellite;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

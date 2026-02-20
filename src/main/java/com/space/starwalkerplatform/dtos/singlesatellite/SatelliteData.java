@@ -1,17 +1,17 @@
-package com.space.starwalkerplatform.dtos;
+package com.space.starwalkerplatform.dtos.singlesatellite;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.swing.text.Position;
 import java.util.List;
 
 @Data
-public class SatellitePosition {
+public class SatelliteData {
 
     @JsonProperty("info")
     private SatelliteInfo info;
 
     @JsonProperty("positions")
-    private List<Position> positions;
+    private List<SatellitePosition> positions;
 
 }

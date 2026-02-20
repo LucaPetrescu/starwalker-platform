@@ -1,7 +1,9 @@
 package com.space.starwalkerplatform;
 
+import com.space.starwalkerplatform.configuration.N2YOConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,14 +18,11 @@ public class StarwalkerplatformApplication {
 
 		String apiKey = properties.getProperty("n2yo.api.key");
 		String baseUrl = properties.getProperty("n2yo.api.base-url");
-		String latitude = properties.getProperty("n2yo.observer.latitude");
-		String longitude = properties.getProperty("n2yo.observer.longitude");
+
 
 		System.out.println("=== Loading Configuration from application.properties ===");
 		System.out.println("API Base URL: " + baseUrl);
 		System.out.println("API Key: " + (apiKey != null && !apiKey.equals("YOUR_API_KEY_HERE") ? "****" : "NOT CONFIGURED"));
-		System.out.println("Observer Location: " + latitude + ", " + longitude);
-		System.out.println("========================================================");
 
 		SpringApplication.run(StarwalkerplatformApplication.class, args);
 
