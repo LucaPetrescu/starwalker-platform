@@ -77,7 +77,7 @@ public class SatelliteService {
     }
 
     public List<VisibleSatelliteData> getVisibleSatellites() {
-        System.out.println("This is supposed to work");
+        System.out.println("This is supposed to work now");
         return null;
     }
 
