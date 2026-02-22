@@ -5,6 +5,7 @@ import com.space.starwalkerplatform.dtos.EarthObserverConstants;
 import com.space.starwalkerplatform.dtos.abovesatellites.SatellitesAboveData;
 import com.space.starwalkerplatform.dtos.abovesatellites.SatellitesAbovePosition;
 import com.space.starwalkerplatform.dtos.singlesatellite.SatelliteData;
+import com.space.starwalkerplatform.dtos.visiblesatellite.VisibleSatelliteData;
 import org.springframework.web.util.UriComponentsBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -75,6 +76,10 @@ public class SatelliteService {
         return result;
     }
 
+    public List<VisibleSatelliteData> getVisibleSatellites() {
+        return null;
+    }
+
     private String buildUrlForSingleSatellite(Integer satelliteId, Integer seconds) {
 
         return UriComponentsBuilder.fromUriString(n2yoConfig.getApi().getBaseUrl())
@@ -89,6 +94,14 @@ public class SatelliteService {
                 .path("/above/{lat}/{lng}/{alt}/{rad}/{categoryId}/")
                 .queryParam("apiKey", n2yoConfig.getApi().getKey())
                 .buildAndExpand(EarthObserverConstants.LATITUDE, EarthObserverConstants.LONGITUDE, EarthObserverConstants.ALTITUDE, EarthObserverConstants.RADIUS, EarthObserverConstants.CATEGORY)
+                .toUriString();
+    }
+
+    private String buildUrlForSatelliteVisualPass(Integer satelliteId, Integer seconds, Integer minimumVisibility) {
+        return UriComponentsBuilder.fromUriString(n2yoConfig.getApi().getBaseUrl())
+                .path("/visualpasses/{satId}/{lat}/{lng}/{alt}/{days}/{minVis}")
+                .queryParam("apiKey", n2yoConfig.getApi().getKey())
+                .buildAndExpand(satelliteId, EarthObserverConstants.LATITUDE, EarthObserverConstants.LONGITUDE, EarthObserverConstants.ALTITUDE, seconds, minimumVisibility)
                 .toUriString();
     }
 }
