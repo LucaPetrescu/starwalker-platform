@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/satellites")
+@CrossOrigin(origins = "http://localhost:5173")
 @AllArgsConstructor
 public class SatelliteController {
 
@@ -26,13 +27,15 @@ public class SatelliteController {
     public ResponseEntity<SatellitesAboveData> getSatellitesAbovePosition() {
 
         SatellitesAboveData satellitesAboveData = satelliteService.getSatelliteAboveData();
+
+        System.out.println(satellitesAboveData);
         return ResponseEntity.ok(satellitesAboveData);
     }
 
     @GetMapping("/closest-satellites-above")
     public ResponseEntity<SatellitesAboveData>  getClosestSatellitesAbovePosition() {
 
-        SatellitesAboveData closestSatellitesAboveData = satelliteService.getClosestSatellites(12);
+        SatellitesAboveData closestSatellitesAboveData = satelliteService.getClosestSatellites(20);
         return ResponseEntity.ok(closestSatellitesAboveData);
     }
 }
